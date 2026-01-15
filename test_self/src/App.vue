@@ -6,23 +6,23 @@ const route = useRoute()
 <template>
   <div class="container">
     <div class="nav-links">
-      <RouterLink 
-        to="/" 
+      <RouterLink
+        to="/"
         :class="{ active: route.path === '/' }"
         class="nav-link"
       >首页</RouterLink>
-      <RouterLink 
-        to="/resume" 
+      <RouterLink
+        to="/resume"
         :class="{ active: route.path === '/resume' }"
         class="nav-link"
       >简历</RouterLink>
-      <RouterLink 
-        to="/blog" 
+      <RouterLink
+        to="/blog"
         :class="{ active: route.path === '/blog' }"
         class="nav-link"
       >博客</RouterLink>
-      <RouterLink 
-        to="/contact" 
+      <RouterLink
+        to="/contact"
         :class="{ active: route.path === '/contact' }"
         class="nav-link"
       >联系我</RouterLink>
@@ -84,7 +84,7 @@ const route = useRoute()
             display: none;
             animation: fadeIn 0.5s ease;
         }
-        
+
         .section.active {
             display: block;
         }

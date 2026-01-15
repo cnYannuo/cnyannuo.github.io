@@ -45,51 +45,102 @@ const blogPosts = ref([
 </template>
 
 <style scoped>
-        /* 博客样式 */
-        .blog-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .blog-img {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .blog-content {
-            padding: 1.5rem;
-        }
-        
-        .blog-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .blog-title {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        
-        .blog-excerpt {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
+/* 与其他页面统一的整体宽度 */
+.section {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-color);
+  color: var(--primary-color);
+}
+
+/* 博客样式 */
+.blog-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.blog-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-img {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 1.5rem;
+}
+
+.blog-date {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.blog-excerpt {
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent-color);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background: #ff5252;
+}
+
+/* 手机端优化 */
+@media (max-width: 768px) {
+  .section {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .blog-posts {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .blog-content {
+    padding: 1.25rem 1rem;
+  }
+}
 </style>

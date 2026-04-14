@@ -633,8 +633,7 @@ window.addEventListener('load', function () {
     <script>
     // 表单验证逻辑修改：不请求外部链接，仅本地判断input值
     // 特定值 AWN95KT28ZZ4EKQJ 跳转 ./msg.html
-    // 空值提示 "在线验证码不能为空"
-    // 其他值提示 "在线验证码不正确，请重新填写"
+    // 使用自定义弹窗替代alert，避免显示网站链接，标题仅为“提示”
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.querySelector('form[name="getXueLi"]');
         if (!form) return;
@@ -657,7 +656,7 @@ window.addEventListener('load', function () {
             const value = (input.value || '').trim().toUpperCase();
             
             if (value === '') {
-                alert('在线验证码不能为空');
+                showPromptModal('在线验证码不能为空');
                 input.focus();
                 return;
             }
@@ -669,7 +668,7 @@ window.addEventListener('load', function () {
             }
             
             // 其他情况
-            alert('在线验证码不正确，请重新填写');
+            showPromptModal('在线验证码不正确，请重新填写');
             input.value = '';  // 清空便于重新输入
             input.focus();
         }
@@ -688,8 +687,53 @@ window.addEventListener('load', function () {
             loading.style.display = "none";
         }
         
-        console.log('表单验证已更新为本地判断逻辑');
+        console.log('表单验证已更新为本地判断逻辑 + 自定义提示弹窗');
     });
+    
+    // 自定义提示弹窗（仅显示“提示”标题，无网站链接）
+    function showPromptModal(message) {
+        // 如果已存在弹窗，先移除
+        const existing = document.getElementById('custom-prompt-modal');
+        if (existing) existing.remove();
+        
+        const modal = document.createElement('div');
+        modal.id = 'custom-prompt-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: "Microsoft YaHei", sans-serif;
+        `;
+        
+        modal.innerHTML = `
+            <div data-transfer="true" class="v-transfer-dom"><div class="ivu-modal-mask" style="z-index: 1003;"></div> <div class="ivu-modal-wrap" style="z-index: 1003;"><div class="ivu-modal" style="width: 416px;"><div class="ivu-modal-content"><!----> <!----> <div class="ivu-modal-body"><div class="ivu-modal-confirm"><div class="ivu-modal-confirm-head"><div class="ivu-modal-confirm-head-icon ivu-modal-confirm-head-icon-info"><i class="ivu-icon ivu-icon-ios-information-circle"></i></div><div class="ivu-modal-confirm-head-title">提示</div></div><div class="ivu-modal-confirm-body"><div>${message}</div></div><div class="ivu-modal-confirm-footer"><button type="button" class="ivu-btn ivu-btn-primary" onclick="this.closest('#custom-prompt-modal').remove()"><!----> <!----> <span>确定</span></button></div></div></div> <!----></div></div></div></div>
+        `;
+        
+        // 点击背景关闭
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+        
+        document.body.appendChild(modal);
+        
+        // ESC键关闭
+        const escHandler = function(e) {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
+    }
     
     // 保留分享和返回顶部功能（如果脚本已加载）
     window.addEventListener('load', function () {

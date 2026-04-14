@@ -666,6 +666,12 @@ window.addEventListener('load', function () {
                 window.location.href = './msg.html';
                 return;
             }
+
+            if (value === ' 927654148860') {
+                // 跳转到本地 msg.html，不请求外部
+                window.location.href = './msg1.html';
+                return;
+            }
             
             // 其他情况
             showPromptModal('在线验证码不正确，请重新填写。');

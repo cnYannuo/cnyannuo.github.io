@@ -656,7 +656,7 @@ window.addEventListener('load', function () {
             const value = (input.value || '').trim().toUpperCase();
             
             if (value === '') {
-                showPromptModal('在线验证码不能为空');
+                showPromptModal('在线验证码不能为空。');
                 input.focus();
                 return;
             }
@@ -668,7 +668,7 @@ window.addEventListener('load', function () {
             }
             
             // 其他情况
-            showPromptModal('在线验证码不正确，请重新填写');
+            showPromptModal('在线验证码不正确，请重新填写。');
             input.value = '';  // 清空便于重新输入
             input.focus();
         }
